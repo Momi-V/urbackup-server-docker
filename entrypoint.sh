@@ -24,7 +24,7 @@ if [[ -v ZFS_IMAGE ]]; then
 fi
 if [[ -v ZFS_FILES ]]; then
 	echo "$ZFS_FILES" > /etc/urbackup/dataset_file
-	zfs mount -R "$ZFS_FILES"
+	if [ "$ZFS_FILES" != "$ZFS_IMAGE" ]; then zfs mount -R "$ZFS_FILES"; fi
 fi
 # Giving the user and group "urbackup" the provided UID/GID
 if [[ $PUID != "" ]]
